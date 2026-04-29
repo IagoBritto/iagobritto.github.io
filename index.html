@@ -170,6 +170,36 @@ h3 {
     color: #1a73e8;
 }
 
+/* HEADER PRINCIPAL (TOPO) */
+.hero {
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+    url('https://www.berca.co.id/wp-content/uploads/2024/09/advanced-data-center-cloud-mining-uhd-wallpaper-scaled.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    padding: 90px 20px;
+}
+
+/* HEADER FIXO (SCROLL) */
+#mainHeader {
+    position: fixed;
+    top: -80px;
+    left: 0;
+    width: 100%;
+    background: #1a73e8;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    transition: top 0.3s ease;
+    z-index: 9999;
+}
+
+#mainHeader.show {
+    top: 0;
+}
+
+
 /* ===== WHATSAPP FLUTUANTE ===== */
 .whatsapp {
     position: fixed;
@@ -196,6 +226,13 @@ h3 {
 <header>
     <h1>Iago Brito</h1>
     <p>Analista de TI | Infraestrutura | Cloud | Suporte Corporativo</p>
+</header>
+
+<header id="mainHeader">
+    <div class="header-container">
+        <span class="logo">Iago Brito</span>
+        <span class="role">| Analista de TI</span>
+    </div>
 </header>
 
 <section id="carrossel">
@@ -308,6 +345,19 @@ h3 {
 <a class="whatsapp" href="https://wa.me/5571987551489?text=Ol%C3%A1%2C%20vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20falar%20com%20voc%C3%AA." target="_blank">
 <i class="fa-brands fa-whatsapp"></i>
 </a>
+
+<script>
+const header = document.getElementById("mainHeader");
+
+window.addEventListener("scroll", () => {
+    if (window.scrollY > 200) {
+        header.classList.add("show");
+    } else {
+        header.classList.remove("show");
+    }
+});
+</script>
+	
 
 </body>
 </html>
