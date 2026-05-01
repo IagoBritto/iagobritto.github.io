@@ -11,6 +11,8 @@
 
 <style>
 
+
+
 /* ===== BASE ===== */
 html { scroll-behavior: smooth; }
 
@@ -64,6 +66,8 @@ section:nth-of-type(1){animation-delay:0.2s;}
 section:nth-of-type(2){animation-delay:0.4s;}
 section:nth-of-type(3){animation-delay:0.6s;}
 section:nth-of-type(4){animation-delay:0.9s;}
+section:nth-of-type(4){animation-delay:0.12s;}
+section:nth-of-type(4){animation-delay:0.15s;}
 
 @keyframes fadeUp {
     to { opacity: 1; transform: translateY(0); }
@@ -157,7 +161,7 @@ h3 {
     border-radius: 10px;
     transition: 0.3s;
     border-left: 4px solid #1a73e8;
-	margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 .card:hover {
@@ -169,6 +173,9 @@ h3 {
     margin-top: 0;
     color: #1a73e8;
 }
+
+
+
 
 /* HEADER PRINCIPAL (TOPO) */
 .hero {
@@ -184,21 +191,39 @@ h3 {
 /* HEADER FIXO (SCROLL) */
 #mainHeader {
     position: fixed;
-    top: -80px;
-    left: 0;
-    width: 100%;
-    background: #1a73e8;
-    color: white;
-    text-align: center;
-    padding: 5px;
-    transition: top 0.3s ease;
-    z-index: 9999;
+  top: -80px;
+  left: 0;
+  width: 100%;
+  background: #1a73e8;
+  color: white;
+  transition: top 0.3s ease;
+  z-index: 1000;
+padding: 3px 2px;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3px 2px;
+}
+/* LADO ESQUERDO */
+.left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* LADO DIREITO */
+.right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 #mainHeader.show {
     top: 0;
 }
-
 
 /* ===== WHATSAPP FLUTUANTE ===== */
 .whatsapp {
@@ -217,23 +242,154 @@ h3 {
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     text-decoration: none;
 }
+.botao {
+  display: inline-block;
+  padding: 5px 20px;
+  background-color: white;
+  color: black;
+  text-decoration: none;
+  border-radius: 5px;
+}
+/* Menu lateral escondido */
+.menu {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.3s;
+  padding-top: 60px;
+  z-index:99999
+}
+
+/* Links do menu */
+.menu a {
+  display: flex;
+  align-items: center;
+
+  padding: 14px 20px;
+  margin: 6px 12px;
+
+  background: rgba(255,255,255,0.1);
+  color: white;
+
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+
+  border-radius: 8px;
+  transition: all 0.25s ease;s
+
+}
+
+.menu a:hover {
+ background: rgba(255,255,255,0.25);
+  transform: translateX(6px);
+}
+
+/* Botão de fechar */
+#fechar {
+background-color: transparent;
+color: white;
+  position: absolute;
+  top: 10px;
+  left: 5px;
+  font-size: 30px;
+}
+
+/* Botão de abrir */
+.menu-btn {
+display: block; /* mostra ☰ */
+ font-size: 24px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+.menu-btn:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+/* Conteúdo */
+.conteudo {
+  padding: 20px;
+}
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  z-index: 9998;
+}
+
+.nav-links {
+  display: none; /* esconde botões */
+}
+
+@media (min-width: 768px) {
+
+  .nav-links {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .menu-btn {
+    display: none; /* esconde ☰ */
+  }
+
+}
+
+
 
 </style>
+
+
 </head>
 
 <body>
 
-<header>
+<header class="hero">
     <h1>Iago Brito</h1>
     <p>Analista de TI | Infraestrutura | Cloud | Suporte Corporativo</p>
 </header>
-
 <header id="mainHeader">
-    <div class="header-container">
-        <span class="logo">Iago Brito</span>
-        <span class="role">| Analista de TI</span>
+  <div class="header-container">
+
+    <!-- LADO ESQUERDO -->
+    <div class="left">
+      <span class="logo">Iago Brito</span>
+      <span class="role">| Analista de TI</span>
     </div>
+
+    <!-- LADO DIREITO -->
+    <div class="right">
+      <div class="nav-links">
+        <a onclick="location.href='#carrossel'" class="botao">Início</a>
+        <a onclick="location.href='#secao2'" class="botao">Portfólio</a>
+        <a onclick="location.href='#secao1'" class="botao">Contato</a>
+      </div>
+
+      <a class="menu-btn" onclick="abrirMenu()">☰</a>
+    </div>
+
+  </div>
 </header>
+
+<div id="menu" class="menu">
+  <a href="javascript:void(0)" id="fechar" onclick="fecharMenu()">×</a>
+  <a onclick="location.href='#carrossel'" >Início</a>
+  <a onclick="location.href='#secao2'" >Portfólio</a>
+  <a onclick="location.href='#secao1'" >contato</a>
+
+</div>
+
 
 <section id="carrossel">
     <h3>Empresas & Tecnologias</h3>
@@ -289,10 +445,10 @@ h3 {
 <p>Atuação em provedores de internet, infraestrutura de redes, fusão de fibra óptica, suporte técnico e administração de serviços corporativos como AWS, Azure, VMware, GLPI, Microsoft 365 e firewall empresarial.</p>
 </section>
 
-<section>
-    <h2>Portfólio Técnico</h2>
+<section id="secao2" >
+    <h2  >Portfólio Técnico</h2>
 
-   <!-- <div class="grid">-->
+   <!-- <div class="grid"> -->
 
         <div class="card">
             <h4>Infraestrutura</h4>
@@ -322,8 +478,8 @@ h3 {
 <p>Suporte remoto e presencial mediante análise técnica. Atendimento focado em resolução de incidentes e melhoria de performance de sistemas e redes.</p>
 </section>
 
-<section class="contact">
-<h2>Contato</h2>
+<section class="contact" >
+<h2 id="secao1">Contato</h2>
 
 <a href="mailto:iago_brito.ib@outlook.com.br">
 <i class="fa-solid fa-envelope"></i> Email
@@ -342,7 +498,7 @@ h3 {
 </main>
 
 <!-- WhatsApp flutuante -->
-<a class="whatsapp" href="https://wa.me/5571987551489?text=Ol%C3%A1%2C%20vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20falar%20com%20voc%C3%AA." target="_blank">
+<a class="whatsapp" href="https://wa.me/5571987551489?text=Ol%C3%A1%2C%20vi%20seu%20portf%C3%B3lio" target="_blank">
 <i class="fa-brands fa-whatsapp"></i>
 </a>
 
@@ -356,8 +512,19 @@ window.addEventListener("scroll", () => {
         header.classList.remove("show");
     }
 });
+
+
+function abrirMenu() {
+  document.getElementById("menu").style.width = "250px";
+  document.getElementById("overlay").style.display = "block";
+}
+
+function fecharMenu() {
+  document.getElementById("menu").style.width = "0";
+  document.getElementById("overlay").style.display = "none";
+}
+
 </script>
-	
 
 </body>
 </html>
